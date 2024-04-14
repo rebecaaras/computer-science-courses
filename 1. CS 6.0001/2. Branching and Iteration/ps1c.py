@@ -13,11 +13,10 @@ def total_savings(annual_salary, portion_saved):
     while time_months < time_goal:
         current_savings = (portion_saved*monthly_salary + current_savings)*((r/12) + 1)
         time_months += 1
-        if time_months%6 == 0:
+        if time_months % 6 == 0:
             monthly_salary += monthly_salary*semi_annual_raise
         
     return current_savings
-
 
 def find_ideal_portion_saved(annual_salary):
     portion_saved = 0.5
@@ -30,13 +29,14 @@ def find_ideal_portion_saved(annual_salary):
     while abs(portion_down_payment - savings) > 100 :
 
         if (portion_down_payment - savings) > 0:
-            portion_saved = portion_saved + 0.001
+            portion_saved += 0.001
+
             savings = total_savings(annual_salary, portion_saved)
 
             i += 1
 
         else:
-            portion_saved = portion_saved - 0.001
+            portion_saved -= 0.001
             savings = total_savings(annual_salary, portion_saved)
 
             i += 1
