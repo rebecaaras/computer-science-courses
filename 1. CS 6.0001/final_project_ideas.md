@@ -30,3 +30,6 @@ Some suggestions of problems:
 
 - cryptography unsolved problems
 - one of the millenium problems
+
+  ### 5. Code something in Java that will on Aduino ONE.
+  - Some code that will interact with the user with buttons and a very basic screen. It could be a tomagochi, an interesting type of calculator. Some kind of physical device.
