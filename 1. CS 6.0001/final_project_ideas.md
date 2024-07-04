@@ -31,5 +31,8 @@ Some suggestions of problems:
 - cryptography unsolved problems
 - one of the millenium problems
 
-  ### 5. Code something in Java that will on Aduino ONE.
-  - Some code that will interact with the user with buttons and a very basic screen. It could be a tomagochi, an interesting type of calculator. Some kind of physical device.
+#### 5. Code something in Java that will on Aduino ONE.
+- Some code that will interact with the user with buttons and a very basic screen. It could be a tomagochi, an interesting type of calculator. Some kind of physical device.
+
+#### 5. A label translator website
+- A website that would pick the label of any product you typed and explain in details what that composition means. What are all the weird names in the "ingredients" list, what they do and which research says about that specific compound. This looks like hard work. Jesus!
