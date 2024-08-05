@@ -1,14 +1,3 @@
-# Problem Set 2, hangman.py
-# Name: 
-# Collaborators:
-# Time spent:
-
-# Hangman Game
-# -----------------------------------
-# Helper code
-# You don't need to understand this helper code,
-# but you will have to know how to use the functions
-# (so be sure to read the docstrings!)
 import random
 import string
 
@@ -54,41 +43,37 @@ def display_dummy(guesses):
   print(dummy[guesses])
   return None
 
-def counts_guesses(num_guesses = 6):
-    guesses_used = 0
+def is_in_secret_word(test_letter):
+    if test_letter in secret_word:
+        return True
+    else:
+        return False
     
-    print('You have {} guesses.')
-    
+def update_guessed_letters(test_letter):
+  letter_position = 0
+  
+  for letter in secret_word:
+    if test_letter == letter:
+      guessed_letters[letter_position] = test_letter
+    letter_position+=1
 
+  return guessed_letters
+
+def try_a_letter():
+   
+   test_letter = input('Try to guess a letter.').lower()
+   if is_in_secret_word(test_letter):
+      guessed_letters = update_guessed_letters(test_letter)
+   else:
+      num_guesses-=1
+   return (guessed_letters, num_guesses)
+  
 
 wordlist = load_words()
 
 def hangman(secret_word):
-    '''
-    secret_word: string, the secret word to guess.
-    
-    Starts up an interactive game of Hangman.
-    
-    * At the start of the game, let the user know how many 
-      letters the secret_word contains and how many guesses s/he starts with.
-      
-    * The user should start with 6 guesses
-
-    * Before each round, you should display to the user how many guesses
-      s/he has left and the letters that the user has not yet guessed.
-    
-    * Ask the user to supply one guess per round. Remember to make
-      sure that the user puts in a letter!
-    
-    * The user should receive feedback immediately after each guess 
-      about whether their guess appears in the computer's word.
-
-    * After each guess, you should display to the user the 
-      partially guessed word so far.
-    
-    Follows the other limitations detailed in the problem write-up.
-    '''
-    print('The word has {} letters.\n'.format(len(secret_word)) + '_ '*len(secret_word))
+    guessed_letters = ['_' for i in len(secret_word)]
+    #print('The word has {} letters.\n'.format(len(secret_word)))
 
     return
 
