@@ -31,52 +31,54 @@ def choose_word(wordlist):
     """
     return random.choice(wordlist)
 
-def display_dummy(guesses):
+def display_dummy(guesses_used):
   dummy = ['-----\n    |\n', #0 guesses used
-           '-----\n    |\n    O\n', #1 guess
-           '-----\n    |\n    O\n   /\n', #2
-           '-----\n    |\n    O\n   /|\n', #3
-           '-----\n    |\n    O\n   /|\\\n', #4
-           '-----\n    |\n    O\n   /|\\\n   /\n', #5
-           '-----\n    |\n    X\n   /|\\\n   / \\\n\\\\\\\\\/////\n'] #6
-
-  print(dummy[guesses])
+           '-----\n    |\n    O\n', #1 guess used
+           '-----\n    |\n    O\n   /\n', #2 guesses used ...
+           '-----\n    |\n    O\n   /|\n',
+           '-----\n    |\n    O\n   /|\\\n',
+           '-----\n    |\n    O\n   /|\\\n   /\n',
+           '-----\n    |\n    X\n   /|\\\n   / \\\n\\\\\\\\\/////\n']
+  print(dummy[guesses_used]+'\n')
   return None
 
-def is_in_secret_word(test_letter):
+def is_in_secret_word(test_letter, secret_word):
     if test_letter in secret_word:
         return True
     else:
         return False
-    
-def update_guessed_letters(test_letter):
-  letter_position = 0
-  
-  for letter in secret_word:
-    if test_letter == letter:
-      guessed_letters[letter_position] = test_letter
-    letter_position+=1
 
-  return guessed_letters
+def hangman(secret_word, num_guesses):
 
-def try_a_letter():
-   
-   test_letter = input('Try to guess a letter.').lower()
-   if is_in_secret_word(test_letter):
-      guessed_letters = update_guessed_letters(test_letter)
-   else:
-      num_guesses-=1
-   return (guessed_letters, num_guesses)
-  
+    guessed_letters = ['_' for i in range(len(secret_word))]
+    display_dummy(6 - num_guesses)
+    test_letter = input('Guess a letter. You have {} guesses.'.format(num_guesses)).lower()
+
+    if is_in_secret_word(test_letter, secret_word) == True:
+        letter_position = 0
+        for letter in secret_word:
+            if letter == test_letter:
+                guessed_letters[letter_position] = test_letter
+            else:
+                continue
+            letter_position+=1
+
+        print('The letter {} is in the word!'.format(test_letter))
+        print(' '.join(guessed_letters))
+    else:
+        num_guesses-=1
+        print('The letter {} is not in the word. You have {} guesses.'.format(test_letter, num_guesses))
+        print(' '.join(guessed_letters))
+
+    return num_guesses
 
 wordlist = load_words()
-
-def hangman(secret_word):
-    guessed_letters = ['_' for i in len(secret_word)]
-    #print('The word has {} letters.\n'.format(len(secret_word)))
-
-    return
-
-    
 secret_word = choose_word(wordlist)
-hangman(secret_word)
+num_guesses = 6
+while num_guesses > 0: 
+    #display_dummy(6 - num_guesses)
+    num_guesses = hangman(secret_word, num_guesses)
+
+if num_guesses == 0:
+    display_dummy(6)
+    print('You died! The secret word was *{}*.'.format(secret_word))
